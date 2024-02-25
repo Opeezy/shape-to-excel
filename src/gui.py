@@ -23,7 +23,7 @@ class Gui(tk.Tk):
         self.master_frame = ttk.Frame(self)
 
         # Console
-        self.console = tk.Text(self.master_frame, height=20)
+        self.console = tk.Text(self.master_frame, height=20, font=('Consolas 9'), bg='black', fg='white')
 
         # Info and Buttons
         self.run_frame = ttk.Frame(self.master_frame)
@@ -38,7 +38,7 @@ class Gui(tk.Tk):
         self.run_divider = ttk.Separator(self.run_frame, orient='vertical')
         self.run_buttons_frame = ttk.Frame(self.run_frame)
         self.import_btn = ttk.Button(self.run_buttons_frame, width=10, text='Import', command=self.import_data)
-        self.run_btn = ttk.Button(self.run_buttons_frame, width=10, text='Run', command=self.run)
+        self.run_btn = ttk.Button(self.run_buttons_frame, width=10, text='Export', command=self.export)
 
         # Divider
         self.browse_divider = ttk.Separator(self.master_frame, orient='horizontal')
@@ -85,7 +85,7 @@ class Gui(tk.Tk):
         self.master_frame.grid(row=0, column=0, sticky='nsew')  
 
         # Console      
-        self.console.grid(row=0, column=0, sticky='nsew', padx=4)
+        self.console.grid(row=0, column=0, sticky='nsew', padx=4, pady=4)
 
         # Info and buttons
         self.run_frame.grid(row=1, column=0, sticky='nsew')
