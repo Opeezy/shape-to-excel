@@ -19,6 +19,7 @@ class ShapeData():
         field_columns = [x[0] for x in self.fields if x[0] != "DeletionFlag"]
         data = np.array(self.records)
         df = pd.DataFrame(data, columns=field_columns)
+        return df
         
     def clear(self):
         self.data = DataFrame
