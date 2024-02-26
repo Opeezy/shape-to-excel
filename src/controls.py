@@ -1,6 +1,8 @@
 import tkinter as tk
 import os
 import time
+import geopandas as gp
+import matplotlib.pyplot as plt
 
 from datetime import datetime
 from tkinter import INSERT, END, DISABLED, NORMAL, StringVar
@@ -15,6 +17,7 @@ class App(Gui):
         self.file: str = None
         self.__set_path()
         self.console.config(state=DISABLED)
+        self.preview_btn.config(state=DISABLED)
         self.run_btn.config(state=DISABLED)
         self.import_btn.config(state=DISABLED)
         self.file_entry.config(state=NORMAL)
@@ -68,17 +71,34 @@ class App(Gui):
         self.__set_path()
         self.__refresh()
 
+    def preview(self):
+        df = gp.read_file(self.shape_path)
+          
+        ax = df.plot(
+            'auto',
+            column = 'Covertype',
+            figsize=(15, 10),
+            legend = True,            
+        )
+        self.__disable_gui()
+        plt.show()
+        self.__refresh()
+
     def __refresh(self):
         self.console.config(state=DISABLED)
         self.file_entry.config(state=NORMAL)
         self.browse_btn.config(state=NORMAL)
+
         if len(self.shape_path) > 0:
             self.import_btn.config(state=NORMAL)
         else:
             self.import_btn.config(state=DISABLED)
+
         if self.data_imported:
             self.run_btn.config(state=NORMAL)
+            self.preview_btn.config(state=NORMAL)
         else:
+            self.preview_btn.config(state=DISABLED)
             self.run_btn.config(state=DISABLED)
         
     
@@ -106,6 +126,7 @@ class App(Gui):
 
     def __disable_gui(self):
         self.console.config(state=DISABLED)
+        self.preview_btn.config(state=DISABLED)
         self.run_btn.config(state=DISABLED)
         self.import_btn.config(state=DISABLED)
         self.file_entry.config(state=DISABLED)

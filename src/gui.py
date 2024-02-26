@@ -37,6 +37,7 @@ class Gui(tk.Tk):
         self.batch_details = ttk.Frame(self.run_info_details)
         self.run_divider = ttk.Separator(self.run_frame, orient='vertical')
         self.run_buttons_frame = ttk.Frame(self.run_frame)
+        self.preview_btn = ttk.Button(self.run_buttons_frame, width=10, text='Preview', command=self.preview)
         self.import_btn = ttk.Button(self.run_buttons_frame, width=10, text='Import', command=self.import_data)
         self.run_btn = ttk.Button(self.run_buttons_frame, width=10, text='Export', command=self.export)
 
@@ -74,6 +75,7 @@ class Gui(tk.Tk):
         self.single_details.columnconfigure(index=0, weight=1)
         self.run_buttons_frame.rowconfigure(index=0, weight=1)
         self.run_buttons_frame.rowconfigure(index=1, weight=1)
+        self.run_buttons_frame.rowconfigure(index=2, weight=1)
         self.run_buttons_frame.columnconfigure(index=0, weight=1)
 
         # File browser
@@ -99,8 +101,9 @@ class Gui(tk.Tk):
         self.batch_details.grid(row=0, column=1, sticky='nsew')
         self.run_divider.grid(row=0, column=1, sticky='ns', pady=3)
         self.run_buttons_frame.grid(row=0, column=2, sticky='nsew')
-        self.import_btn.grid(row=0, column=0, sticky='e', padx=4, pady=4)
-        self.run_btn.grid(row=1, column=0, sticky='e', padx=4, pady=4)
+        self.preview_btn.grid(row=0, column=0, sticky='e', padx=4, pady=4)
+        self.import_btn.grid(row=1, column=0, sticky='e', padx=4, pady=4)
+        self.run_btn.grid(row=2, column=0, sticky='e', padx=4, pady=4)
 
         # Divider
         self.browse_divider.grid(row=2, column=0, sticky='ews')
