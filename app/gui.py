@@ -10,8 +10,10 @@ class Gui(tk.Tk):
 
         '''Root Settings'''
         self.title("Shape to Excel")
-        self.geometry("500x500")
-        self.resizable(False, False)
+        #self.geometry("500x500")
+        #self.resizable(False, False)
+        #self.attributes('-fullscreen', True)
+        self.state('zoomed')
 
         '''Variables'''
 
@@ -23,7 +25,7 @@ class Gui(tk.Tk):
         self.master_frame = ttk.Frame(self)
 
         # Console
-        self.console = tk.Text(self.master_frame, height=20, font=('Consolas 9'), bg='black', fg='white')
+        self.console = tk.Text(self.master_frame, height=20, font=('Consolas 9'), bg='white', fg='black')
 
         # Info and Buttons
         self.run_frame = ttk.Frame(self.master_frame)
