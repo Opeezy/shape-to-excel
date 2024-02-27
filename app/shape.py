@@ -14,6 +14,7 @@ class ShapeData():
         self.records: list = self.shape_file.records()
         self.shapes: Shapes = self.shape_file.shapes()
         self.data: DataFrame = self.__convert()
+        self.total_bbox = self.shape_file.bbox
         self.bound_boxes = np.empty((len(self.shapes), 4))
         self.__fill_bounding_boxes()
 

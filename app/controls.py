@@ -9,6 +9,7 @@ from tkinter import INSERT, END, DISABLED, NORMAL, StringVar
 from tkinter import filedialog as fd
 from gui import Gui
 from shape import ShapeData
+from canvas import CanvasHandler
 
 class App(Gui):
     def __init__(self, screenName: str | None = None, baseName: str | None = None, className: str = "Tk", useTk: bool = True, sync: bool = False, use: str | None = None) -> None:
@@ -37,17 +38,20 @@ class App(Gui):
         is_valid = self.__validate_path() 
         if is_valid:
             self.shape = ShapeData(self.shape_path)
-            self.file = os.path.basename(self.shape_path)
-            self.title.config(text=self.file)
-            self.fields_len = len(self.shape.fields)
-            self.__write(f'{self.fields_len} fields loaded from {self.file}')
-            self.records_len = len(self.shape.records)
-            self.__write(f'{self.records_len} records loaded {self.file}')
-            self.shapes_len = len(self.shape.shapes)
-            self.__write(f'{self.shapes_len} shapes loaded {self.file}')
-            self.__set_labels()
-            self.data_imported = True
-            self.__refresh()
+            ch = CanvasHandler(self.canvas)
+            ch.draw_shape(self.shape)
+            #ch.draw_shape(self.shape)
+            # self.file = os.path.basename(self.shape_path)
+            # self.title.config(text=self.file)
+            # self.fields_len = len(self.shape.fields)
+            # self.__write(f'{self.fields_len} fields loaded from {self.file}')
+            # self.records_len = len(self.shape.records)
+            # self.__write(f'{self.records_len} records loaded {self.file}')
+            # self.shapes_len = len(self.shape.shapes)
+            # self.__write(f'{self.shapes_len} shapes loaded {self.file}')
+            # self.__set_labels()
+            # self.data_imported = True
+            # self.__refresh()
         else: 
             self.__write("Invalid path...")
 
