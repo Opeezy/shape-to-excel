@@ -8,7 +8,7 @@ from datetime import datetime
 from tkinter import INSERT, END, DISABLED, NORMAL, StringVar
 from tkinter import filedialog as fd
 from gui import Gui
-from cShape import ShapeData
+from shape import ShapeData
 
 class App(Gui):
     def __init__(self, screenName: str | None = None, baseName: str | None = None, className: str = "Tk", useTk: bool = True, sync: bool = False, use: str | None = None) -> None:
@@ -16,7 +16,6 @@ class App(Gui):
         self.shape_path:str = None
         self.file: str = None
         self.__set_path()
-        self.console.config(state=DISABLED)
         self.preview_btn.config(state=DISABLED)
         self.run_btn.config(state=DISABLED)
         self.import_btn.config(state=DISABLED)
@@ -85,7 +84,6 @@ class App(Gui):
         self.__refresh()
 
     def __refresh(self):
-        self.console.config(state=DISABLED)
         self.file_entry.config(state=NORMAL)
         self.browse_btn.config(state=NORMAL)
 
@@ -105,14 +103,7 @@ class App(Gui):
     def __set_path(self):
         self.shape_path: str = self.browse_sv.get()
 
-    def __write(self, message: str):
-        self.console.config(state=NORMAL)
-        self.console.insert(END, f'{self.__message(message)}\n')
-        self.console.config(state=DISABLED)
 
-    def __message(self, string):
-        return f'{datetime.today()}: {string}'
-    
     def __validate_path(self) -> bool:
         if os.path.exists(self.shape_path) and self.shape_path.endswith('.shp'):
             return True
@@ -125,7 +116,6 @@ class App(Gui):
         self.shapes_label.config(text=f'Shapes: {self.shapes_len}')
 
     def __disable_gui(self):
-        self.console.config(state=DISABLED)
         self.preview_btn.config(state=DISABLED)
         self.run_btn.config(state=DISABLED)
         self.import_btn.config(state=DISABLED)

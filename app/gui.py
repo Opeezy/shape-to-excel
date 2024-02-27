@@ -8,10 +8,11 @@ class Gui(tk.Tk):
     def __init__(self, screenName: str | None = None, baseName: str | None = None, className: str = "Tk", useTk: bool = True, sync: bool = False, use: str | None = None) -> None:
         super().__init__(screenName, baseName, className, useTk, sync, use)
 
-        '''Root Settings'''
+        '''Root Window'''
         self.title("Shape to Excel")
-        self.geometry("500x500")
-        self.resizable(False, False)
+        # self.geometry("500x500")
+        # self.resizable(False, False)
+        self.state('zoomed')
 
         '''Variables'''
 
@@ -22,8 +23,8 @@ class Gui(tk.Tk):
         # Master
         self.master_frame = ttk.Frame(self)
 
-        # Console
-        self.console = tk.Text(self.master_frame, height=20, font=('Consolas 9'), bg='black', fg='white')
+        # Canvas
+        self.canvas = tk.Canvas(self.master_frame, height=20, bg='white')
 
         # Info and Buttons
         self.run_frame = ttk.Frame(self.master_frame)
@@ -86,8 +87,8 @@ class Gui(tk.Tk):
         # Master
         self.master_frame.grid(row=0, column=0, sticky='nsew')  
 
-        # Console      
-        self.console.grid(row=0, column=0, sticky='nsew', padx=4, pady=4)
+        # Canvas     
+        self.canvas.grid(row=0, column=0, sticky='nsew', padx=4, pady=4)
 
         # Info and buttons
         self.run_frame.grid(row=1, column=0, sticky='nsew')
